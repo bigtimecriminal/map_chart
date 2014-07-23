@@ -6,3 +6,7 @@ testbed/build/
 testbed/data/
 testbed/node_modules/
 testbed/vendor/
+*.swp
+infiles/
+states.json
+states.topo.json
