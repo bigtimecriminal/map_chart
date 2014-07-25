@@ -17,10 +17,10 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
     .projection(projection)
   vectorMap = null
 
-  d3.json("../data/maps/countries.topo.025.json", (err, _vectorMap) ->
+  d3.json("../data/maps/merged_subunits.topo.json", (err, _vectorMap) ->
   
-    width = 1100
-    height = 550
+    width = 1600
+    height = 800
 
 
     projection.scale(205)
@@ -34,10 +34,11 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
           "height" : height
           "id" : "vectorMap"
           "fill-opacity" : 0
-          "stroke" : "black"
+          "stroke" : "white"
+          "fill" : (d) ->
+            "red"
           "stroke-width" : 1
 
-    console.log g
 
     map_path = g.selectAll("path")
       .data(topojson.feature(vectorMap, vectorMap.objects.countries).features)
@@ -47,10 +48,19 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
       .attr
         "d" : path
         "fill" : "#444"
-        "id" : (d) -> makeId(d.id)
+        "id" : (d) -> 
+          console.log d
+          makeId(d.id)
         "fill-opacity" : 0.3
+        "fill" : (d) ->
+          val = Math.floor(Math.random() * 4)
+          if val is 0
+            return "red"
+          if val is 1
+            return "yellow"
+          if val is 2
+            return "blue"
         "stroke-opacity" : 0.5
 
-    debugger
   )
 )

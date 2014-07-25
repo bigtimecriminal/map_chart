@@ -1,44 +1,33 @@
 #!/bin/bash
+# recommend running with ./makemap.sh 0.05 subunits
 
-rm countries.json
-rm countries.topo.json
-rm states.json
-rm states.topo.json
+rm subunits.json
+rm subunits.topo.json
+rm merged_subunits.topo.json
 
-if [ $# -eq 0 ]
-  then 
-    echo "No arguments. Bye."
-    exit
-fi
+exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM' 'SHN' 'MAF' 'SPM' 'SXM' 'SGS' 'TCA' 'UMI' 'VIR' 'WLF' \
+  'NSV' 'FRO' 'ECG' 'EUI' 'SFA' 'FSA' 'SGG' 'ATB' 'ATS' 'PAZ' 'PMD' 'ESC' 'FJI' 'NJM' 'WSM' 'TON' 'NZC' 'KIR' 'NZA' 'GUM' 'MNP' 'PLW' 'REU' 'MUS' \
+  'BAC' 'CHP' 'ASM' 'SHS' 'SGX' 'FSM' 'SYC' 'ZAI'\
+  'CPV' )
+query=$(printf "and SU_A3 <> '%s' " "${exclude[@]}")
+query=${query:4}
+echo $query
 
-if [ $2 = "countries" ]; then 
-  ogr2ogr \
-    -f GeoJSON \
-    -where "SU_A3 <> 'ATA'" \
-    countries.json \
-    infiles/ne_10m_admin_0_countries_lakes.shp
+ogr2ogr \
+  -f GeoJSON \
+  -where "$query" \
+  subunits.json \
+  infiles/ne_10m_admin_0_map_subunits.shp
 
-  topojson \
-    -o countries.topo.json \
-    --id-property ADMIN \
-    --p NAME -p ADMIN \
-    --simplify-proportion $1\
-    -- \
-    countries.json
-fi
+topojson \
+  -o subunits.topo.json \
+  --id-property SOVEREIGNT \
+  --simplify-proportion $1\
+  --p SU_A3 -p UN_A3\
+  subunits.json
 
-if [ $2 = "states" ]; then 
-  ogr2ogr \
-    -f GeoJSON \
-    -where "ADM0_A3 = 'USA'" \
-    states.json \
-    infiles/ne_10m_admin_1_states_provinces.shp
+topojson-merge subunits.topo.json \
+  --io=subunits \
+  --oo=countries \
+  -o testbed/data/maps/merged_subunits.topo.json
 
-  topojson \
-    -o states.topo.json \
-    --id-property NAME \
-    --p NAME -p NAME \
-    --simplify-proportion $1\
-    -- \
-    states.json
-fi
