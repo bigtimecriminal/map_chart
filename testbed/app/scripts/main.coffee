@@ -49,7 +49,7 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
         "d" : path
         "fill" : "#444"
         "id" : (d) -> 
-          console.log d
+          console.log d.id
           makeId(d.id)
         "fill-opacity" : 0.3
         "fill" : (d) ->
