@@ -18,7 +18,6 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
   vectorMap = null
 
   d3.json("../data/maps/merged_subunits.topo.json", (err, _vectorMap) ->
-  
     width = 1600
     height = 800
 
@@ -40,17 +39,17 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
           "stroke-width" : 1
 
 
+    featureSet = topojson.feature(vectorMap, vectorMap.objects.countries)
+    geometries = featureSet.features
     map_path = g.selectAll("path")
-      .data(topojson.feature(vectorMap, vectorMap.objects.countries).features)
+      .data(geometries)
 
     map_path.enter()
       .append("path")
       .attr
         "d" : path
         "fill" : "#444"
-        "id" : (d) -> 
-          console.log d.id
-          makeId(d.id)
+        "id" : (d) -> makeId(d.id)
         "fill-opacity" : 0.3
         "fill" : (d) ->
           val = Math.floor(Math.random() * 4)
@@ -62,5 +61,17 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
             return "blue"
         "stroke-opacity" : 0.5
 
+    g.selectAll(".place-label")
+      .data(geometries)
+      .enter()
+      .append("circle")
+      .attr
+        "class" : "place-label"
+        "cx" : (d) -> path.centroid(d)[0]
+        "cy" : (d) -> path.centroid(d)[1]
+        "r" : 2
+        "fill" : "#000"
+        "fill-opacity" : 1
+        "stroke-opacity" : 0
   )
 )
