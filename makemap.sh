@@ -5,6 +5,8 @@ rm subunits.json
 rm subunits.topo.json
 rm merged_subunits.topo.json
 
+rm states.json
+
 exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM' 'SHN' 'MAF' 'SPM' 'SXM' 'SGS' 'TCA' 'UMI' 'VIR' 'WLF' \
   'NSV' 'FRO' 'ECG' 'EUI' 'SFA' 'FSA' 'SGG' 'ATB' 'ATS' 'PAZ' 'PMD' 'ESC' 'FJI' 'NJM' 'WSM' 'TON' 'NZC' 'KIR' 'NZA' 'GUM' 'MNP' 'PLW' 'REU' 'MUS' \
   'BAC' 'CHP' 'ASM' 'SHS' 'SGX' 'FSM' 'SYC' 'ZAI'\
@@ -12,6 +14,14 @@ exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM
 query=$(printf "and SU_A3 <> '%s' " "${exclude[@]}")
 query=${query:4}
 echo $query
+
+ogr2ogr \
+  -f GeoJSON \
+  -where "adm0_a3='USA'" \
+  states.json \
+  infiles/ne_10m_admin_1_states_provinces.shp
+
+exit
 
 #construct geoJSON
 ogr2ogr \
