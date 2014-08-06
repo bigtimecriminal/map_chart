@@ -14,14 +14,14 @@ exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM
   'CPV' )
 query=$(printf "and SU_A3 <> '%s' " "${exclude[@]}")
 query=${query:4}
-query+="and SOV_A3 <> 'US1'"
+#query+="and SOV_A3 <> 'US1'"
 
 #construct US states
-ogr2ogr \
-  -f GeoJSON \
-  -where "adm0_a3='USA'" \
-  states.json \
-  infiles/ne_10m_admin_1_states_provinces_lakes.shp
+#ogr2ogr \
+#  -f GeoJSON \
+#  -where "adm0_a3='USA'" \
+#  states.json \
+#  infiles/ne_10m_admin_1_states_provinces_lakes.shp
 
 #construct geoJSON
 ogr2ogr \
@@ -33,17 +33,16 @@ ogr2ogr \
 #construct topoJSON subunits
 topojson \
   -o subunits.topo.json \
-  --id-property SOVEREIGNT \
+  --id-property SOV_A3 \
   --simplify-proportion $1\
   --p SOV_A3 \
-  subunits.json \
-  states.json
+  subunits.json 
 
 #merge subunits
 topojson-merge subunits.topo.json \
   --io=subunits \
   --oo=countries \
-  --key='d.SOV_A3' \
+  --k='d.properties.SOV_A3' \
   -o merged_subunits.topo.json
 
 cp merged_subunits.topo.json testbed/data/maps/merged_subunits.topo.json
