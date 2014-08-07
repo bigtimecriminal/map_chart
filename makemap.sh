@@ -7,6 +7,7 @@ rm merged_subunits.topo.json
 rm states.json
 rm mergedStatesAndSubunits.json
 rm countries.json
+rm worldMap.topo.json
 
 exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM' 'SHN' 'MAF' 'SPM' 'SXM' 'SGS' 'TCA' 'UMI' 'VIR' 'WLF' \
   'NSV' 'FRO' 'ECG' 'EUI' 'SFA' 'FSA' 'SGG' 'ATB' 'ATS' 'PAZ' 'PMD' 'ESC' 'FJI' 'NJM' 'WSM' 'TON' 'NZC' 'KIR' 'NZA' 'GUM' 'MNP' 'PLW' 'REU' 'MUS' \
@@ -19,9 +20,10 @@ query+="and SOV_A3 <> 'US1'"
 ##construct US states
 ogr2ogr \
   -f GeoJSON \
-  -where "adm0_a3='USA'" \
   states.json \
   infiles/ne_10m_admin_1_states_provinces_lakes.shp
+
+exit
 
 #construct geoJSON
 ogr2ogr \
@@ -50,7 +52,6 @@ topojson \
 topojson-merge subunits.topo.json \
   --io=subunits \
   --oo=countries \
-  --k='d.properties.SOV_A3' \
   -o merged_subunits.topo.json
 
 #merge states
@@ -60,10 +61,11 @@ topojson-merge states.topo.json \
   --k='d.properties.admin' \
   -o merged_states.topo.json
 
+#bring both files in
 topojson -o merged_subunits.topo.json \
   -- \
   merged_states.topo.json \
   merged_subunits.topo.json \
 
-cp merged_subunits.topo.json testbed/data/maps/merged_subunits.topo.json
-
+#resolve the feature merge manually
+coffee manualMerge.coffee
