@@ -15,15 +15,14 @@ exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM
   'CPV' )
 query=$(printf "and SU_A3 <> '%s' " "${exclude[@]}")
 query=${query:4}
-query+="and SOV_A3 <> 'US1'"
+query+="and SOV_A3 <> 'US1' and SOV_A3 <> 'CAN'"
 
 ##construct US states
 ogr2ogr \
   -f GeoJSON \
+  -where "adm0_a3='USA' or adm0_a3='CAN'" \
   states.json \
   infiles/ne_10m_admin_1_states_provinces_lakes.shp
-
-exit
 
 #construct geoJSON
 ogr2ogr \
