@@ -60,6 +60,9 @@ module.exports = (grunt) ->
       scripts:
         files: 'app/scripts/**/*.coffee'
         tasks: ['coffee', 'copy:source']
+      data:
+        files: 'data/maps/*'
+        tasks: ['copy:data']
       options:
         livereload: true
 

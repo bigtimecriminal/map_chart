@@ -12,12 +12,14 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
   makeId = (str) ->
     str.replace(/[!\"\s#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
 
+  # projection = d3.geo.albersUsa()
   projection = d3.geo.equirectangular()
   path = d3.geo.path()
     .projection(projection)
   vectorMap = null
 
-  d3.json("../data/maps/merged_subunits.topo.json", (err, _vectorMap) ->
+  # d3.json("../data/maps/final_map.topo.json", (err, _vectorMap) ->
+  d3.json("../data/maps/worldMap.topo.json", (err, _vectorMap) ->
     width = 1600
     height = 800
 
@@ -38,9 +40,11 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
             "red"
           "stroke-width" : 1
 
-
     featureSet = topojson.feature(vectorMap, vectorMap.objects.countries)
     geometries = featureSet.features
+
+    debugger
+
     map_path = g.selectAll("path")
       .data(geometries)
 
@@ -49,7 +53,7 @@ requirejs( ['d3', 'threejs', 'topojson'], (d3, threejs, topojson) ->
       .attr
         "d" : path
         "fill" : "#444"
-        "id" : (d) -> makeId(d.id)
+        "id" : (d) -> if d.id? then makeId(d.id) else "State"
         "fill-opacity" : 0.3
         "fill" : (d) ->
           val = Math.floor(Math.random() * 4)

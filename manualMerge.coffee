@@ -2,7 +2,7 @@ fs = require('fs')
 sys = require('sys')
 exec = require('child_process').exec
 
-vectorMap = JSON.parse(fs.readFileSync "merged_subunits.topo.json")
+vectorMap = JSON.parse(fs.readFileSync "states_and_subunits.topo.json")
 
 vectorMap.objects.countries2.geometries.forEach (d) -> vectorMap.objects.countries.geometries.push d
 delete vectorMap.objects.countries2
