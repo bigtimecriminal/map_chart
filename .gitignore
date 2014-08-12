@@ -1,12 +1,9 @@
 *.DS_Store
-countries.json
-countries.topo.json
-infile/
 testbed/build/
 testbed/data/
 testbed/node_modules/
 testbed/vendor/
 *.swp
 infiles/
-states.json
-states.topo.json
+*.json
+exclude.txt
