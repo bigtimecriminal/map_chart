@@ -7,6 +7,7 @@ worldMap.topo.json: states_and_subunits.topo.json
 
 states_and_subunits.topo.json : subunits.topo.json states.topo.json
 	topojson -o $@ \
+		--p SOV_A3 \
 		-- \
 		$< \
 		$(word 2,$^) \
@@ -35,6 +36,7 @@ states.topo.json: states.json
 	topojson-merge $@ \
 		--io=states \
 		--oo=countries2 \
+    --k='d.properties.admin' \
 		-o $@
 
 subunits.json: infiles/ne_10m_admin_0_map_subunits.shp exclude.txt
@@ -72,3 +74,5 @@ exclude.txt:
 
 clean:
 	rm -rf *.json
+	rm exclude.txt
+
