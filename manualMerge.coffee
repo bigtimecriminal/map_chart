@@ -13,6 +13,7 @@ vectorMap.objects.subunits.geometries = vectorMap.objects.subunits.geometries.fi
 
 #remove US and Canada from countries layer
 vectorMap.objects.countries.geometries = vectorMap.objects.countries.geometries.filter (d) ->
+  delete d.properties.SU_A3
   d.properties.SOV_A3 isnt "US1" and d.properties.SOV_A3 isnt "CAN"
 
 #merge the countries2 layer into countries
