@@ -45,6 +45,7 @@ subunits.json: infiles/ne_10m_admin_0_map_subunits.shp exclude.txt
 		-where "$(shell cat exclude.txt)" \
 		$@ \
 		$<
+	coffee adjustSubunits.coffee
 
 states.json: infiles/ne_10m_admin_1_states_provinces_lakes.shp
 	ogr2ogr \
