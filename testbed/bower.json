@@ -24,6 +24,7 @@
     "jquery": "~2.1.0",
     "d3": "~3.4.4",
     "threejs": "r67",
-    "topojson": "~1.6.15"
+    "topojson": "~1.6.15",
+    "underscore": "~1.6.0"
   }
 }

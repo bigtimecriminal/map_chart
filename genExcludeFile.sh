@@ -5,5 +5,8 @@ exclude=( 'ATA' 'HMD' 'PYF' 'ATF' 'ALA' 'CYM' 'FLK' 'GGY' 'NCL' 'NIU' 'NFK' 'BLM
   'CPV' )
 query=$(printf "and SU_A3 <> '%s' " "${exclude[@]}")
 query=${query:4}
-query+="and SOV_A3 <> 'US1' and SOV_A3 <> 'CAN'"
+
+#these will now be deleted on the country level
+#query+="and SOV_A3 <> 'US1' and SOV_A3 <> 'CAN'"
+
 echo $query > exclude.txt

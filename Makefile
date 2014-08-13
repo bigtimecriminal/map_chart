@@ -8,6 +8,7 @@ worldMap.topo.json: states_and_subunits.topo.json
 states_and_subunits.topo.json : subunits.topo.json states.topo.json
 	topojson -o $@ \
 		--p SOV_A3 \
+		--p SU_A3 \
 		-- \
 		$< \
 		$(word 2,$^) \
@@ -18,6 +19,7 @@ subunits.topo.json: subunits.json
 		--id-property SOVEREIGNT \
 		--simplify-proportion 0.05 \
 		--p SOV_A3 \
+		--p SU_A3 \
 		$< 
 
 	topojson-merge $@ \
@@ -31,12 +33,14 @@ states.topo.json: states.json
 		--id-property name \
 		--simplify-proportion 0.05\
 		--p admin \
+		--p SOV_A3=sov_a3 \
 		$<
 
 	topojson-merge $@ \
 		--io=states \
 		--oo=countries2 \
     --k='d.properties.admin' \
+		--p SOV_A3 \
 		-o $@
 
 subunits.json: infiles/ne_10m_admin_0_map_subunits.shp exclude.txt
