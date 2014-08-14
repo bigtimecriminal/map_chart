@@ -5,5 +5,7 @@ testbed/node_modules/
 testbed/vendor/
 *.swp
 infiles/
-*.json
+*.topo.json
+states.json
+subunits.json
 exclude.txt
