@@ -1,9 +1,11 @@
-
+SHELL = /bin/sh
+SIMPLIFY_PROPORTION = 0.05
+REMOVE_LAYERS = ""
 
 all: worldMap.topo.json
-
+	
 worldMap.topo.json: states_and_subunits.topo.json
-	coffee manualMerge.coffee
+	coffee manualMerge.coffee --r $(REMOVE)
 
 states_and_subunits.topo.json : subunits.topo.json states.topo.json
 	topojson -o $@ \
@@ -17,7 +19,7 @@ subunits.topo.json: subunits.json
 	topojson \
 		-o $@ \
 		--id-property SOVEREIGNT \
-		--simplify-proportion 0.05 \
+		--simplify-proportion $(SIMPLIFY_PROPORTION) \
 		--p SOV_A3 \
 		--p SU_A3 \
 		$< 
@@ -31,7 +33,7 @@ states.topo.json: states.json
 	topojson \
 		-o $@ \
 		--id-property name \
-		--simplify-proportion 0.05\
+		--simplify-proportion $(SIMPLIFY_PROPORTION) \
 		--p admin \
 		--p SOV_A3=sov_a3 \
 		$<

@@ -1,5 +1,6 @@
 fs = require('fs')
 sys = require('sys')
+
 exec = require('child_process').exec
 
 vectorMap = JSON.parse(fs.readFileSync "states_and_subunits.topo.json")
@@ -19,6 +20,11 @@ vectorMap.objects.countries.geometries = vectorMap.objects.countries.geometries.
 #merge the countries2 layer into countries
 vectorMap.objects.countries2.geometries.forEach (d) -> vectorMap.objects.countries.geometries.push d
 delete vectorMap.objects.countries2
+
+if ~process.argv.indexOf("--r")
+	layersToRemove = process.argv[(process.argv.indexOf("--r")+1)...]
+	layersToRemove.forEach (d) ->
+		delete vectorMap.objects[d]
 
 output = JSON.stringify(vectorMap,null,0)
 fs.writeFileSync('worldMap.topo.json', output, 'utf8')

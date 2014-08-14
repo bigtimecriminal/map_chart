@@ -52,6 +52,8 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
     featureSet = topojson.feature(vectorMap, vectorMap.objects.countries)
     geometries = featureSet.features
 
+    debugger
+
     map_path = g.selectAll("path")
       .data(geometries)
 
