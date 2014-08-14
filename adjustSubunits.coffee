@@ -1,3 +1,5 @@
+#seperates Greenland and French Guiana from their country groups.
+
 fs = require('fs')
 sys = require('sys')
 exec = require('child_process').exec
