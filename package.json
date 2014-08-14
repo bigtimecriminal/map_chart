@@ -4,7 +4,7 @@
   "description": "Formalized topojson mapping workflow.",
   "keywords": [
     "topojson",
-    "geojson",
+    "geojson"
   ],
   "author": {
     "name": "Anton Kulikov",
