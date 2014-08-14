@@ -1,6 +1,6 @@
 # Map Chart
 
-This project represents a formalized workflow for the creation of global and US state topojson maps suitable for choropleth creation, generation from NaturalEarth 10m cultural vector data.
+This project represents a formalized workflow for the creation of global and US state topojson maps suitable for choropleth charts. The processing pipeline relies on NaturalEarth 10m cultural vector data.
 
 ## Mapping pipeline
 
@@ -30,13 +30,9 @@ The mapping pipeline will produce a single topojson map file, worldMap.topo.json
 - states [US states]
 - subunits [just the boundary of the continental US] have an SU_A3 property and a SOVEREIGNT id
 
-countries have an SU_A3 prop and a name id
-subunits have an SU_A3 prop and a SOVEREIGNT id
-states have an SOV_A3 id
-
 The file is also automatically copied to the testbed.
 
 ## Make options
 
 SIMPLIFY_PROPORTION (0.05) - Will pass this simplification factor to topojson when creating maps. 
-REMOVE_LAYERS ("") - Will remove the named layers from the finished data product. ex. REMOVE_LAYERS="countries subunits" will leave just a US states map
+REMOVE_LAYERS ("") - Will remove the named layers from the finished data product. 
