@@ -28,5 +28,3 @@ if ~process.argv.indexOf("--r")
 
 output = JSON.stringify(vectorMap,null,0)
 fs.writeFileSync('worldMap.topo.json', output, 'utf8')
-puts = (error, stdout, stderr) -> sys.puts(stdout)
-exec("cp worldMap.topo.json testbed/data/maps/", puts)
