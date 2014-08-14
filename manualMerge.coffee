@@ -21,6 +21,11 @@ vectorMap.objects.countries.geometries = vectorMap.objects.countries.geometries.
 vectorMap.objects.countries2.geometries.forEach (d) -> vectorMap.objects.countries.geometries.push d
 delete vectorMap.objects.countries2
 
+#remove Canadian states
+vectorMap.objects.states.geometries = vectorMap.objects.states.geometries.filter (d) ->
+  d.properties.SOV_A3 isnt "CAN"
+
+#delete specified unwanted layers
 if ~process.argv.indexOf("--r")
 	layersToRemove = process.argv[(process.argv.indexOf("--r")+1)...]
 	layersToRemove.forEach (d) ->
