@@ -13,6 +13,7 @@ states_and_subunits.topo.json : subunits.topo.json states.topo.json
 	topojson -o $@ \
 		--p SOV_A3 \
 		--p SU_A3 \
+    --p postal \
 		-- \
 		$< \
 		$(word 2,$^) \
@@ -38,6 +39,7 @@ states.topo.json: states.json
 		--simplify-proportion $(SIMPLIFY_PROPORTION) \
 		--p admin \
 		--p SOV_A3=sov_a3 \
+		--p postal \
 		$<
 
 	topojson-merge $@ \
@@ -45,6 +47,7 @@ states.topo.json: states.json
 		--oo=countries2 \
     --k='d.properties.admin' \
 		--p SOV_A3 \
+		--p postal \
 		-o $@
 
 subunits.json: infiles/ne_10m_admin_0_map_subunits.shp exclude.txt
