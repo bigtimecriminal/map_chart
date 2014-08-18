@@ -2,8 +2,9 @@ SHELL = /bin/sh
 SIMPLIFY_PROPORTION = 0.05
 REMOVE_LAYERS = ""
 
-COUNTRY_ID_PROP = "SOVEREIGNT"
-STATE_ID_PROP = "name"
+COUNTRY_ID_PROP = SOVEREIGNT
+STATE_ID_PROP = name
+MERGED_STATES_ID_PROP = admin
 
 all: worldMap.topo.json
 	
@@ -51,7 +52,7 @@ states.topo.json: states.json
 	topojson-merge $@ \
 		--io=states \
 		--oo=countries2 \
-    --k='d.properties.admin' \
+    --k='d.properties.$(MERGED_STATES_ID_PROP)' \
 		--p SOV_A3 \
 		--p postal \
 		-o $@
@@ -91,6 +92,11 @@ exclude.txt:
 	./genExcludeFile.sh
 
 clean:
-	rm -rf *.json
-	rm exclude.txt
+	rm -f states.json
+	rm -f states.topo.json
+	rm -f states_and_subunits.topo.json
+	rm -f subunits.json
+	rm -f subunits.topo.json
+	rm -f worldMap.topo.json
+	rm -f exclude.txt
 
