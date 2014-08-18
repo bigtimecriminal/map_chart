@@ -10,3 +10,4 @@ states.json
 subunits.json
 exclude.txt
 node_modules/
+make
