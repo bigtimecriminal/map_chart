@@ -82,8 +82,8 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
       .append("circle")
       .attr
         "class" : "place-label"
-        # "cx" : (d) -> getCentroid(d)[0]
-        # "cy" : (d) -> getCentroid(d)[1]
+        "cx" : (d) -> getCentroid(d)[0]
+        "cy" : (d) -> getCentroid(d)[1]
         "r" : 2
         "fill" : "#000"
         "fill-opacity" : 1
