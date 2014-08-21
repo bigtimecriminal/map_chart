@@ -82,11 +82,11 @@ infiles/ne_10m_admin_1_states_provinces_lakes.shp: infiles/ne_10m_admin_1_states
 
 infiles/ne_10m_admin_0_map_subunits.zip:
 	mkdir -p $(dir $@)
-	curl -o $@ 'http://www.nacis.org/naturalearth/10m/cultural/ne_10m_admin_0_map_subunits.zip'
+	curl -o $@ 'http://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_map_subunits.zip'
 
 infiles/ne_10m_admin_1_states_provinces_lakes.zip:
 	mkdir -p $(dir $@)
-	curl -o $@ 'http://www.nacis.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces_lakes.zip'
+	curl -o $@ 'http://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_1_states_provinces_lakes.zip'
 
 exclude.txt:
 	./genExcludeFile.sh
