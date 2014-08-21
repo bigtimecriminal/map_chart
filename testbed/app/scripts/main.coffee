@@ -21,9 +21,10 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
   vectorMap = null
 
   getCentroid = (d) ->
-    associatedSubunit = _.find(subunits, (_sU) -> _sU.properties.SOV_A3 is d.properties.SOV_A3 )
-    if associatedSubunit?
-      return path.centroid(associatedSubunit)
+    if subunits
+      associatedSubunit = _.find(subunits, (_sU) -> _sU.properties.SOV_A3 is d.properties.SOV_A3 )
+      if associatedSubunit?
+        return path.centroid(associatedSubunit)
     path.centroid(d)
 
   # d3.json("../data/maps/final_map.topo.json", (err, _vectorMap) ->
@@ -48,11 +49,12 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
             "red"
           "stroke-width" : 1
 
-    subunits = topojson.feature(vectorMap, vectorMap.objects.subunits).features
-    featureSet = topojson.feature(vectorMap, vectorMap.objects.countries)
-    geometries = featureSet.features
+    layerToDisplay = "countries"
 
-    debugger
+    if subunits?
+      subunits = topojson.feature(vectorMap, vectorMap.objects.subunits).features
+    featureSet = topojson.feature(vectorMap, vectorMap.objects[layerToDisplay])
+    geometries = featureSet.features
 
     map_path = g.selectAll("path")
       .data(geometries)
@@ -80,8 +82,8 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
       .append("circle")
       .attr
         "class" : "place-label"
-        "cx" : (d) -> getCentroid(d)[0]
-        "cy" : (d) -> getCentroid(d)[1]
+        # "cx" : (d) -> getCentroid(d)[0]
+        # "cy" : (d) -> getCentroid(d)[1]
         "r" : 2
         "fill" : "#000"
         "fill-opacity" : 1

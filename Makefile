@@ -9,7 +9,7 @@ MERGED_STATES_ID_PROP = admin
 all: worldMap.topo.json
 	
 worldMap.topo.json: states_and_subunits.topo.json
-	coffee manualMerge.coffee --r $(REMOVE)
+	coffee manualMerge.coffee --r $(REMOVE_LAYERS)
 	mkdir -p testbed/data/maps
 	cp worldMap.topo.json testbed/data/maps/worldMap.topo.json
 
