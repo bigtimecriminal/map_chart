@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 SIMPLIFY_PROPORTION = 0.05
-REMOVE_LAYERS = ""
+
 
 COUNTRY_ID_PROP = SOVEREIGNT
 STATE_ID_PROP = name
@@ -9,7 +9,7 @@ MERGED_STATES_ID_PROP = admin
 all: worldMap.topo.json
 	
 worldMap.topo.json: states_and_subunits.topo.json
-	coffee manualMerge.coffee --r $(REMOVE_LAYERS)
+	coffee manualMerge.coffee --r=$(REMOVE_LAYER) --e=$(EXTERNAL_DATA)
 	mkdir -p testbed/data/maps
 	cp worldMap.topo.json testbed/data/maps/worldMap.topo.json
 

@@ -21,10 +21,6 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
   vectorMap = null
 
   getCentroid = (d) ->
-    if subunits
-      associatedSubunit = _.find(subunits, (_sU) -> _sU.properties.SOV_A3 is d.properties.SOV_A3 )
-      if associatedSubunit?
-        return path.centroid(associatedSubunit)
     path.centroid(d)
 
   # d3.json("../data/maps/final_map.topo.json", (err, _vectorMap) ->
@@ -49,10 +45,8 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
             "red"
           "stroke-width" : 1
 
-    layerToDisplay = "countries"
+    layerToDisplay = "states"
 
-    if subunits?
-      subunits = topojson.feature(vectorMap, vectorMap.objects.subunits).features
     featureSet = topojson.feature(vectorMap, vectorMap.objects[layerToDisplay])
     geometries = featureSet.features
 
