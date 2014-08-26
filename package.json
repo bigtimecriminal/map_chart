@@ -13,8 +13,5 @@
   "repository": {
     "type": "git",
     "url": "http://github.com/anton2n/map_chart.git"
-  },
-  "devDependencies": {
-    "topojson": ">=1.6.15"
   }
 }

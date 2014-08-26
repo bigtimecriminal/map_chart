@@ -9,7 +9,7 @@ The mapping pipeline is started by calling 'make' from the base directory. The p
 ```bash
 brew install node gdal
 npm install -g coffee-script
-npm install
+npm install -g topojson
 ```
 
 ## Testbed
