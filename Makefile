@@ -1,10 +1,6 @@
 SHELL = /bin/sh
-SIMPLIFY_PROPORTION = 0.05
 
-
-COUNTRY_ID_PROP = SOVEREIGNT
-STATE_ID_PROP = name
-MERGED_STATES_ID_PROP = admin
+include config.mk
 
 all: worldMap.topo.json
 	

@@ -31,7 +31,8 @@ delete vectorMap.objects["subunits"]
 externalData = _.find(process.argv, (d) -> d[0..2] is '--e')?.split('=')[1]
 if externalData
   if not fs.existsSync externalData
-    console.error "manualMerger.coffee missing external data file"
+    console.error "manualMerge.coffee missing external data file"
+    return
   else
     externalData = JSON.parse(fs.readFileSync externalData)
     #for every layer mentioned in the external file
