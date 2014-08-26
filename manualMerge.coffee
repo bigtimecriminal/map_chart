@@ -20,9 +20,9 @@ vectorMap.objects.states.geometries = vectorMap.objects.states.geometries.filter
   d.properties.SOV_A3 isnt "CAN"
 
 #delete specified unwanted layer
-layerToRemove = _.find(process.argv, (d) -> d[0..2] is '--r')
+layerToRemove = _.find(process.argv, (d) -> d[0..2] is '--r').split('=')[1]
 if layerToRemove?
-  delete vectorMap.objects[layerToRemove.split('=')[1]]
+  delete vectorMap.objects[layerToRemove]
 
 #delete subunits
 delete vectorMap.objects["subunits"]
@@ -42,7 +42,7 @@ if externalData
         #for every feature
         Object.keys(externalData[layer][extraProperty]).forEach (featureId) ->
           #match id and bind property
-          foundFeature = _.find(vectorMap.objects["states"].geometries, (d) -> d.id is featureId)
+          foundFeature = _.find(vectorMap.objects[layer].geometries, (d) -> d.id is featureId)
           if foundFeature?
             foundFeature.properties[extraProperty] = externalData[layer][extraProperty][featureId]
 
