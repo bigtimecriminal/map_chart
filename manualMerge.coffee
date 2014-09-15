@@ -6,6 +6,15 @@ exec = require('child_process').exec
 
 vectorMap = JSON.parse(fs.readFileSync "states_and_subunits.topo.json")
 
+mergeLayers = _.find(process.argv, (d) -> d[0..2] is '--m').split('=')[1]
+if mergeLayers isnt ""
+  mergeLayers = JSON.parse mergeLayers
+  mergeLayers.remove = mergeLayers.remove.map (sov_a3) -> _.find(vectorMap.objects.countries.geometries, (d) -> d.properties.SOV_A3 is sov_a3)
+  mergeLayers.merge = _.find(vectorMap.objects.countries.geometries, (d) -> d.properties.SOV_A3 is mergeLayers.merge)
+  mergeLayers.remove.forEach (d) ->
+    mergeLayers.merge.arcs = mergeLayers.merge.arcs.concat d.arcs
+    vectorMap.objects.countries.geometries.splice(_.indexOf(vectorMap.objects.countries.geometries,d),1)
+
 #remove US and Canada from countries layer
 vectorMap.objects.countries.geometries = vectorMap.objects.countries.geometries.filter (d) ->
   delete d.properties.SU_A3
