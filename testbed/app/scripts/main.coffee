@@ -23,21 +23,21 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
   getCentroid = (d) ->
     path.centroid(d)
 
-  # d3.json("../data/maps/final_map.topo.json", (err, _vectorMap) ->
   d3.json("../data/maps/worldMap.topo.json", (err, _vectorMap) ->
     width = 1600
     height = 800
 
-    projection.scale(205)
+    projection.scale(805)
       .translate([width/2,height/2])
       .center([30, 15])
       .rotate([-10,0])
 
     vectorMap = _vectorMap
-    g = d3.select("body").append("svg")
+    svg = d3.select("body").append("svg").attr
+        "width" : width
+        "height" : height
+    g =  svg.append("g")
         .attr
-          "width" : width
-          "height" : height
           "id" : "vectorMap"
           "fill-opacity" : 0
           "stroke" : "white"
@@ -45,7 +45,7 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
             "red"
           "stroke-width" : 1
 
-    layerToDisplay = "states"
+    layerToDisplay = "countries"
 
     featureSet = topojson.feature(vectorMap, vectorMap.objects[layerToDisplay])
     geometries = featureSet.features
@@ -82,5 +82,13 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
         "fill" : "#000"
         "fill-opacity" : 1
         "stroke-opacity" : 0
+
+    zoom = d3.behavior.zoom()
+      .on("zoom", () ->
+        g.attr("transform","translate("+
+            d3.event.translate.join(",")+")scale("+d3.event.scale+")")
+      )
+
+    svg.call(zoom)
   )
 )
