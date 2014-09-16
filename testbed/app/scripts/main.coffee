@@ -18,7 +18,7 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
   path = d3.geo.path()
     .projection(projection)
   subunits = null
-  vectorMap = null
+  @vectorMap = null
 
   getCentroid = (d) ->
     if d.properties.centroid?
@@ -34,7 +34,7 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
       .center([30, 15])
       .rotate([-10,0])
 
-    vectorMap = _vectorMap
+    @vectorMap = _vectorMap
     svg = d3.select("body").append("svg").attr
         "width" : width
         "height" : height
