@@ -39,6 +39,9 @@ The file is also automatically copied to the testbed.
 ## Make options, set in config.mk
 
 SIMPLIFY_PROPORTION (0.05) - Will pass this simplification factor to topojson when creating maps.
-REMOVE_LAYER ("") - Will remove the named layer from the finished data product. Currently the only valid options are "countries" and "states"
-COUNTRY_ID_PROP [SOV_A3] - Sets the property used as an id for the country layer
-STATE_ID_PROP [postal] - Sets the property used as an id for the state layer
+
+REMOVE_LAYER ("") - Will remove the named layer from the finished data product. Currently the only valid options are "countries" and "states".
+
+COUNTRY_ID_PROP [SOV_A3] - Sets the property used as an id for the country layer.
+
+STATE_ID_PROP [postal] - Sets the property used as an id for the state layer.

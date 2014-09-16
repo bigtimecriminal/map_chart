@@ -21,6 +21,8 @@ requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, 
   vectorMap = null
 
   getCentroid = (d) ->
+    if d.properties.centroid?
+      return projection(d.properties.centroid)
     path.centroid(d)
 
   d3.json("../data/maps/worldMap.topo.json", (err, _vectorMap) ->

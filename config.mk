@@ -5,6 +5,6 @@ STATE_ID_PROP = postal
 MERGED_STATES_ID_PROP = SOV_A3
 
 REMOVE_LAYER = 
-EXTERNAL_DATA = 
+EXTERNAL_DATA = "externalData/centroids.json"
 
 MERGE = "[{\"remove\":[\"CYN\", \"CNM\"], \"merge\": \"CYP\"},{\"remove\":[\"VAT\", \"SMR\"], \"merge\": \"ITA\"}, {\"remove\":[\"AND\"], \"merge\": \"FR1\"}]"
