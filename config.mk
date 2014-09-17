@@ -7,4 +7,4 @@ MERGED_STATES_ID_PROP = SOV_A3
 REMOVE_LAYER = 
 EXTERNAL_DATA = "externalData/centroids.json"
 
-MERGE = "[{\"remove\":[\"CYN\", \"CNM\"], \"merge\": \"CYP\"},{\"remove\":[\"VAT\", \"SMR\"], \"merge\": \"ITA\"}, {\"remove\":[\"MCO\"],\"merge\":\"FR1\"},{\"remove\":[\"AND\"],\"merge\": \"ESP\"}]"
+MERGE = "[{\"remove\":[\"CYN\", \"CNM\"], \"merge\": \"CYP\"},{\"remove\":[\"VAT\", \"SMR\"], \"merge\": \"ITA\"}, {\"remove\":[\"MCO\"],\"merge\":\"FR1\"}]"
