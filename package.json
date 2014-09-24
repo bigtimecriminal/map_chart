@@ -10,6 +10,10 @@
     "name": "Anton Kulikov",
     "url": "https://twitter.com/bigtimecriminal"
   },
+  "dependencies": {
+    "topojson": "^1.6.18",
+    "underscore": "~1.6.0"
+  },
   "repository": {
     "type": "git",
     "url": "http://github.com/anton2n/map_chart.git"
