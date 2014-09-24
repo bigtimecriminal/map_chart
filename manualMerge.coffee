@@ -24,6 +24,10 @@ if idsToMerge isnt ""
 
 #copy over countries properties to countries2 geometries
 vectorMap.objects.countries2.geometries.forEach (d) ->
+  relatedPath = _.find(vectorMap.objects.countries.geometries, (f) -> d.id is f.id)
+  if not relatedPath?
+    console.log "manualMerge could not match ", d.id, " properties not copied."
+    return
   d.properties =  _.find(vectorMap.objects.countries.geometries, (f) -> d.id is f.id).properties
 
 #remove US and Canada from countries layer
