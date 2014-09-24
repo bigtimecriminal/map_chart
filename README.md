@@ -10,6 +10,13 @@ The mapping pipeline is started by calling 'make' from the base directory. The p
 brew install node gdal
 npm install -g coffee-script
 npm install -g topojson
+npm install
+```
+
+The default configuration file can be brought in with
+
+```bash
+cp sample_configurations/config.world_and_states.mk config.mk
 ```
 
 ## Testbed
@@ -24,11 +31,11 @@ bower install
 
 ## Products
 
-The mapping pipeline will produce a single topojson map file, worldMap.topo.json, containing three layers:
+With the 'world_and_states' configuration file, the mapping pipeline will produce a single topojson map, worldMap.topo.json, containing three layers:
 
 - countries [national boundaries] with these properties:
-  * SOV_A3 [abbreviation] -> also the id
-  * longName 
+  * SOV_A3 (3 letter abbreviation) -> also the id
+  * longName (a caveat - this property is renamed from "SOVEREIGNT", so to use it as the id, you'll need to use that original name in the config file.)
 - states [US states] with these properties:
   * SOV_A3 ["US1"]
   * longName
