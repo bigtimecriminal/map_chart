@@ -12,3 +12,4 @@ exclude.txt
 node_modules/
 make
 untracked/
+config.mk
