@@ -26,7 +26,7 @@ if idsToMerge isnt ""
 vectorMap.objects.countries2.geometries.forEach (d) ->
   relatedPath = _.find(vectorMap.objects.countries.geometries, (f) -> d.id is f.id)
   if not relatedPath?
-    console.log "manualMerge could not match ", d.id, " properties not copied."
+    console.log "manualMerge.coffee couldn't match ", d.id, " properties not copied."
     return
   d.properties =  _.find(vectorMap.objects.countries.geometries, (f) -> d.id is f.id).properties
 
@@ -67,7 +67,7 @@ if externalData
         #for every feature
         Object.keys(externalData[layer][extraProperty]).forEach (featureId) ->
           #match id and bind property
-          foundFeature = _.find(vectorMap.objects[layer].geometries, (d) -> d.id is featureId)
+          foundFeature = _.find(vectorMap.objects[layer]?.geometries, (d) -> d.id is featureId)
           if foundFeature?
             foundFeature.properties[extraProperty] = externalData[layer][extraProperty][featureId]
 
