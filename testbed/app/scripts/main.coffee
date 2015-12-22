@@ -2,13 +2,12 @@ require.config
   paths:
     'jquery': '../vendor/jquery/dist/jquery.min'
     'd3': '../vendor/d3/d3'
-    'threejs': '../vendor/threejs/build/three'
     'topojson': '../vendor/topojson/topojson'
     'underscore': '../vendor/underscore/underscore'
   shim:
     'd3': exports: 'd3'
 
-requirejs( ['d3', 'threejs', 'topojson', 'underscore'], (d3, threejs, topojson, _) ->
+requirejs( ['d3', 'topojson', 'underscore'], (d3, topojson, _) ->
 
   makeId = (str) ->
     str.replace(/[!\"\s#$%&'\(\)\*\+,\.\/:;<=>\?\@\[\\\]\^`\{\|\}~]/g, '')
